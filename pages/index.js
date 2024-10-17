@@ -1,6 +1,6 @@
 // pages/index.js
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Add Bootstrap for styling
+import 'bootstrap/dist/css/bootstrap.min.css'; // Add Bootstrap for stylin
 
 export default function Home() {
   const [age, setAge] = useState('');
