@@ -1,0 +1,19 @@
+.container {
+  background-color: #F7EFEA;
+  color: #333333;
+  font-family: 'Roboto', sans-serif;
+}
+
+.header {
+  background-color: #E6F1FF;
+}
+
+.hero {
+  text-align: center;
+  padding: 50px;
+}
+
+.recommendations {
+  background-color: #DFF1E6;
+  padding: 30px;
+}
