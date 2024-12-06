@@ -1,19 +1,21 @@
 .container {
-  background-color: #F7EFEA;
-  color: #333333;
-  font-family: 'Roboto', sans-serif;
-}
-
-.header {
-  background-color: #E6F1FF;
+  /* Styles for the container */
 }
 
 .hero {
-  text-align: center;
-  padding: 50px;
+  /* Styles for the hero section */
+}
+
+.ageBlocks {
+  /* Styles for the age blocks container */
+  display: flex;
+  gap: 10px;
 }
 
 .recommendations {
-  background-color: #DFF1E6;
-  padding: 30px;
+  /* Styles for the recommendations section */
+}
+
+.references {
+  /* Styles for the references section */
 }
