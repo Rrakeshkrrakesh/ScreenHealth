@@ -1,50 +1,35 @@
-export default function handler(req, res) {
-  const { age, country } = req.body;
-  let recommendations = [];
-
-  // Validate input
-  if (typeof age !== 'number' || typeof country !== 'string') {
-    return res.status(400).json({ error: 'Invalid input data.' });
+export default {
+  india: {
+    '20-30': [
+      'Pap smear and HPV test every 3-5 years.',
+      'Breast self-exams.',
+      'STD screenings for sexually active women.'
+    ],
+    '30-40': [
+      'Pap smear and HPV tests every 3-5 years.',
+      'Mammogram and breast self-examination.',
+      'Thyroid function test.',
+      'Blood pressure and cholesterol tests.',
+      'Blood glucose test annually.',
+      'Bone density test.',
+      'Eye check-up every 2 years.',
+      'Cancer screenings based on risk factors.'
+    ],
+    '40-50': [
+      'Continue Pap smear and HPV tests.',
+      'Mammogram annually.',
+      'Diabetes screening.',
+      'Bone density test.',
+      'Cardiovascular health screening.',
+      'Cancer screenings based on risk factors.'
+    ],
+    '50+': [
+      'Mammogram annually.',
+      'Bone density test.',
+      'Colorectal cancer screening.',
+      'Heart health tests (cholesterol, blood pressure, glucose).',
+      'Regular eye and dental exams.',
+      'Pelvic exams, Pap smears, and ultrasounds for cancer screenings.'
+    ]
   }
-
-  // Define screenings with criteria and source reference
-  const screenings = [
-    {
-      name: 'Colon Cancer Screening',
-      age: 50,
-      country: 'all',
-      source: 'Health Screening Guidelines for Women 50 to 64 - Health Encyclopedia - University of Rochester Medical Center.pdf'
-    },
-    {
-      name: 'Diabetes Screening',
-      age: 45,
-      country: 'all',
-      source: 'Health Screening Guidelines for Women 50 to 64 - Health Encyclopedia - University of Rochester Medical Center.pdf'
-    },
-    // Add more screenings from the PDF and other sources here
-    // Example:
-    // {
-    //   name: 'Mammogram',
-    //   age: 50,
-    //   country: 'all',
-    //   source: 'Health Screening Guidelines for Women 50 to 64 - Health Encyclopedia - University of Rochester Medical Center.pdf'
-    // }
-  ];
-
-  // Filter recommendations based on age and country
-  screenings.forEach(screening => {
-    if (age >= screening.age && (screening.country === 'all' || screening.country === country)) {
-      recommendations.push({
-        name: screening.name,
-        source: screening.source
-      });
-    }
-  });
-
-  // Send response
-  if (recommendations.length > 0) {
-    res.status(200).json(recommendations);
-  } else {
-    res.status(200).json({ message: 'No recommendations available for the given input.' });
-  }
-}
+};
