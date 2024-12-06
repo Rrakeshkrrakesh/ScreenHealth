@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import styles from '../styles/Home.module.css';  
 const recommendationsData = {
   india: {
     '20-30': [
@@ -77,46 +77,60 @@ export default function Home() {
   };
 
   return (
-    <div className="container mt-5">
-      <h1 className="text-center">Women's Health Screening Recommendations</h1>
-      <form onSubmit={handleSubmit} className="mt-4">
-        <div className="form-group">
-          <label>Enter Your Age:</label>
-          <input
-            type="number"
-            className="form-control"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group mt-3">
-          <label>Choose Your Country:</label>
-          <select
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-            className="form-control"
-            required
-          >
-            <option value="">Select Country</option>
-            {Object.keys(recommendationsData).map((countryName) => (
-              <option key={countryName} value={countryName}>{countryName}</option>
-            ))}
-          </select>
-        </div>
-        <button type="submit" className="btn btn-primary mt-3">Get Recommendations</button>
-      </form>
-      {recommendations.length > 0 && (
-        <div className="mt-4">
-          <h3 className="text-center">Your Recommendations</h3>
-          <ul>
-            {recommendations.map((rec, index) => (
-              <li key={index}>{rec}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-      {error && <div className="alert alert-danger mt-3">{error}</div>}
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <nav className="navbar navbar-expand-lg navbar-light">
+          <div className="container-fluid">
+            <a className="navbar-brand" href="/">Home</a>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <a className="nav-link" href="/screenings">Screenings</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/resources">Resources</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/contact">Contact Us</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <section className={styles.hero}>
+        <h1>Welcome to Women's Health Screening Recommendations</h1>
+        <p>Get personalized health screening advice based on your age and country.</p>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="age" className="form-label">Your Age:</label>
+            <input type="number" className="form-control" id="age" value={age} onChange={(e) => setAge(e.target.value)} required />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="country" className="form-label">Your Country:</label>
+            <input type="text" className="form-control" id="country" value={country} onChange={(e) => setCountry(e.target.value)} required />
+          </div>
+          <button type="submit" className="btn btn-primary">Get Recommendations</button>
+        </form>
+      </section>
+
+      <section className={styles.recommendations}>
+        {recommendations.length > 0 && (
+          <div>
+            <h2>Your Recommendations:</h2>
+            <ul>
+              {recommendations.map((rec, index) => (
+                <li key={index}>{rec}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
     </div>
   );
 }
+          
