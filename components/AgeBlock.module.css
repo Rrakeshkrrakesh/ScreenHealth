@@ -1,0 +1,16 @@
+.ageBlock {
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+  color: #333;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.ageBlock:hover {
+  background: linear-gradient(45deg, #fad0c4, #ff9a9e);
+}
+
+.selected {
+  border: 2px solid #333;
+}
