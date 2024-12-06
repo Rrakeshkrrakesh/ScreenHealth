@@ -34,7 +34,8 @@ const recommendationsData = {
       'Regular eye and dental exams.',
       'Pelvic exams, Pap smears, and ultrasounds for cancer screenings.'
     ]
-  }
+  },
+  // Add other countries here
 };
 
 function getAgeRange(age) {
@@ -52,36 +53,58 @@ export default function Home() {
   const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
-  e.preventDefault();
-  const numericAge = parseInt(age, 10);
-  if (isNaN(numericAge)) {
-    setError('Please enter a valid numeric age.');
-    return;
-  }
-  if (numericAge < 20 || numericAge > 100) {
-    setError('Please enter an age between 20 and 100.');
-    return;
-  }
-  const ageRange = getAgeRange(numericAge);
-  if (ageRange === 'invalid') {
-    setError('Please enter a valid age range.');
-    return;
-  }
-  const countryKey = country.toLowerCase();
-  if (recommendationsData[countryKey] && recommendationsData[countryKey][ageRange]) {
-    setRecommendations(recommendationsData[countryKey][ageRange]);
-  } else {
-    setError('Recommendations for this country and age range are not available.');
-  }
+    e.preventDefault();
+    const numericAge = parseInt(age, 10);
+    if (isNaN(numericAge)) {
+      setError('Please enter a valid numeric age.');
+      return;
+    }
+    if (numericAge < 20 || numericAge > 100) {
+      setError('Please enter an age between 20 and 100.');
+      return;
+    }
+    const ageRange = getAgeRange(numericAge);
+    if (ageRange === 'invalid') {
+      setError('Please enter a valid age range.');
+      return;
+    }
+    const countryKey = country.toLowerCase();
+    if (recommendationsData[countryKey] && recommendationsData[countryKey][ageRange]) {
+      setRecommendations(recommendationsData[countryKey][ageRange]);
+    } else {
+      setError('Recommendations for this country and age range are not available.');
+    }
   };
-
-  const countries = ['India', 'USA', 'Canada', 'UK'];
 
   return (
     <div className="container mt-5">
       <h1 className="text-center">Women's Health Screening Recommendations</h1>
       <form onSubmit={handleSubmit} className="mt-4">
-        {/* Form inputs with validation */}
+        <div className="form-group">
+          <label>Enter Your Age:</label>
+          <input
+            type="number"
+            className="form-control"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group mt-3">
+          <label>Choose Your Country:</label>
+          <select
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            className="form-control"
+            required
+          >
+            <option value="">Select Country</option>
+            {Object.keys(recommendationsData).map((countryName) => (
+              <option key={countryName} value={countryName}>{countryName}</option>
+            ))}
+          </select>
+        </div>
+        <button type="submit" className="btn btn-primary mt-3">Get Recommendations</button>
       </form>
       {recommendations.length > 0 && (
         <div className="mt-4">
